@@ -6,22 +6,24 @@
         จำนวนสินค้า
       </div>
       <div>
-        <div v-for="(order,index) in orderuser" :key="index" class="flex justify-start m-10">
-          
-          <div>
-            <img :src="require(`../assets/Case/1.jpg`)" class="w-auto h-52" />
-          </div>
-          <div class="ml-24">
-            <div class="text-lg ">
-              name;
-              <!-- {{order.title}} -->
+        <div class="shadow m-5">
+          <div v-for="(order,index) in orderuser" :key="index" class="flex justify-start m-10">
+            
+            <!-- <div>
+              <img :src="require(`../assets/Case`)" class="w-auto h-52" />
+            </div> -->
+            <div class="ml-24">
+              <div class="text-lg ">
+                name;
+                <!-- {{order.title}} -->
+              </div>
             </div>
+            
+              <div class="absolute right-10">
+                <div class=" material-icons">cancel</div>
+              </div>
+            
           </div>
-          
-            <div class="absolute right-10">
-              <div class=" material-icons">cancel</div>
-            </div>
-          
         </div>
       </div>
     </div>

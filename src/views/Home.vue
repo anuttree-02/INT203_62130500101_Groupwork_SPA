@@ -27,83 +27,83 @@ export default {
 
   data() {
     return {
-    //   urlphotos: "http://localhost:5000/photos",
-    //   urluserorder: "http://localhost:5000/orderuser",
+      urlphotos: "http://localhost:5000/photos",
+      urluserorder: "http://localhost:5000/orderuser",
+      photos: [
+        //   {
+        //     "src": "1.jpg",
+        //     "title": "LAKERS MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "2.jpg",
+        //     "title": "HEATS MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "3.jpg",
+        //     "title": "MAGIC MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "4.jpg",
+        //     "title": "PACERS MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "5.jpg",
+        //     "title": "PACERS MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "6.jpg",
+        //     "title": "BUCKS MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "7.jpg",
+        //     "title": "76ERS MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "8.jpg",
+        //     "title": "GRIZZLIES MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "9.jpg",
+        //     "title": "MAVERICKS MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // },
+        // {
+        //     "src": "10.jpg",
+        //     "title": "SPURS MANIA CASE",
+        //     "favor": false,
+        //     "like": 0,
+        //     "price": 55
+        // }
+      ],
       show: { icon: true, searchbar: false },
       input: "",
-      photos: [
-          {
-            "src": "1.jpg",
-            "title": "LAKERS MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "2.jpg",
-            "title": "HEATS MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "3.jpg",
-            "title": "MAGIC MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "4.jpg",
-            "title": "PACERS MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "5.jpg",
-            "title": "PACERS MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "6.jpg",
-            "title": "BUCKS MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "7.jpg",
-            "title": "76ERS MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "8.jpg",
-            "title": "GRIZZLIES MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "9.jpg",
-            "title": "MAVERICKS MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        },
-        {
-            "src": "10.jpg",
-            "title": "SPURS MANIA CASE",
-            "favor": false,
-            "like": 0,
-            "price": 55
-        }
-      ],
-    //   orderuser: [],
+      orderuser: [],
     };
   },
 
@@ -135,24 +135,27 @@ export default {
       console.log(this.select_image);
       this.select_image = false;
     },
+    async GetItems(){
+      try {
+        const res = await fetch(this.urlphotos)
+        const data = await res.json()
+        return data
+      } catch (error) {
+        console.log(error)
+      }
+    },
+    
+        async fetchGetUserOrder() {
+          const res = await fetch(this.urluserorder);
+          const data = await res.json();
 
-    //     async fetchGetItem() {
-    //       const res = await fetch(this.urlphotos);
-    //       const data = await res.json();
-
-    //       return data;
-    //     },
-    //     async fetchGetUserOrder() {
-    //       const res = await fetch(this.urluserorder);
-    //       const data = await res.json();
-
-    //       return data;
-    //     },
-    //   },
-    //   async created() {
-    //     this.photos = await this.fetchGetItem()
-    //     this.urluserorder = await this.fetchGetUserOrder()
-    //   },
+          return data;
+        },
+    },
+    async created(){
+       this.photos = await this.GetItems()
+       this.urluserorder = await this.fetchGetUserOrder()
+    },
     computed: {
       // searchphotos() {
       //   return this.photos.filter((c) => {
@@ -171,6 +174,5 @@ export default {
         return this.photos.filter((t) => t.like).length;
       },
     },
-  },
 };
 </script>

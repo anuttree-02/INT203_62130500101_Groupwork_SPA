@@ -3,7 +3,7 @@
     <ul class="grid grid-cols-2 gap-y-10 ml-10 lg:grid-cols-5">
       <li v-for="(photo, index) in searchphotos" :key="index">
         <img
-          :src="require(`../assets/Case/${photo.src}`)"
+          :src="require(`../assets/${photo.src}`)"
           class="px-2 py-5 h-auto w-"
           :alt="photo.title"
         />
