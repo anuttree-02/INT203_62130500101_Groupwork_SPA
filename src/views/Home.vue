@@ -7,6 +7,8 @@
       :searchphotos="photos"
       @like-photo="favorite"
       @zoom-photo="zoomPhoto"
+      @add-tocart="addToCart"
+
     />
   </div>
 </template>
@@ -28,7 +30,7 @@ export default {
   data() {
     return {
       urlphotos: "http://localhost:5000/photos",
-      urluserorder: "http://localhost:5000/orderuser",
+      urlorderuser: "http://localhost:5000/orderuser",
       photos: [
         //   {
         //     "src": "1.jpg",
@@ -144,9 +146,32 @@ export default {
         console.log(error)
       }
     },
-    
+    addToCart() {
+      this.addProduct({
+        src: this.photos.src,
+        title: this.photos.title,
+        price: this.photos.price,
+      });
+    },
+    async addProduct(product) {
+      try {
+        await fetch(this.urlordeuser, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            src: product.src,
+            title: product.title,
+            price: product.price,
+          }),
+        });
+      } catch (error) {
+        console.log("error");
+      }
+    },
         async fetchGetUserOrder() {
-          const res = await fetch(this.urluserorder);
+          const res = await fetch(this.urlorderuser);
           const data = await res.json();
 
           return data;
@@ -154,7 +179,7 @@ export default {
     },
     async created(){
        this.photos = await this.GetItems()
-       this.urluserorder = await this.fetchGetUserOrder()
+       this.urlorderuser = await this.fetchGetUserOrder()
     },
     computed: {
       // searchphotos() {

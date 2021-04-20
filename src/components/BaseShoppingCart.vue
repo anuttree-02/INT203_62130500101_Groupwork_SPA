@@ -9,13 +9,13 @@
         <div class="shadow m-5">
           <div v-for="(order,index) in orderuser" :key="index" class="flex justify-start m-10">
             
-            <!-- <div>
-              <img :src="require(`../assets/Case`)" class="w-auto h-52" />
-            </div> -->
+            <div>
+              <img :src="require(`../assets${order.src}`)" class="w-auto h-52" />
+            </div>
             <div class="ml-24">
               <div class="text-lg ">
-                name;
-                <!-- {{order.title}} -->
+                
+                {{order.title}}
               </div>
             </div>
             
@@ -34,11 +34,11 @@ export default {
   data() {
     return {
       orderuser: [],
-      urluserorder: "http://localhost:5000/orderuser",
+      urlorderuser: "http://localhost:5000/orderuser",
     };
   },
   async created() {
-    const res = await fetch(this.urluserorder);
+    const res = await fetch(this.urlorderuser);
     this.orderuser = [...this.orderuser, await res.json()];
   },
   methods:{

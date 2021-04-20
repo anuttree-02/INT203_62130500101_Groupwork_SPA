@@ -11,7 +11,7 @@
         <div class="flex flex-row justify-start space-x-1">
           <button
             class="bg-black text-white font-serif px-3 my-auto ml-2 text-lg rounded-md focus:outline-none"
-            v-on:click="addtoshoppigcart(index)"
+            v-on:click="addToCart()"
           >
             <i> ADD TO CART </i>
           </button>
@@ -23,12 +23,12 @@
 </template>
 <script>
 export default {
-  // data() {
-  //   return {
-  //     photos: [],
-  //     url: "http://localhost:5000/photos",
-  //   };
-  // },
+  data() {
+    return {
+      photos: [],
+      urlorderuser: "http://localhost:5000/orderuser",
+    };
+  },
   // async created() {
   //   const res = await fetch(this.url);
   //   this.photos = [...this.photos, await res.json()];
@@ -54,30 +54,8 @@ export default {
     //   return data;
     // },
 
-    addToCart() {
-      this.addProduct({
-        src: this.photos.src,
-        title: this.photos.title,
-        price: this.photos.price,
-      });
-    },
-    async addProduct(product) {
-      try {
-        await fetch(this.urluserorder, {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            src: product.src,
-            title: product.title,
-            price: product.price,
-          }),
-        });
-      } catch (error) {
-        console.log("error");
-      }
-    },
+    
+    
 
     favorite(index) {
       this.$emit("like-photo", index);
@@ -85,6 +63,9 @@ export default {
     zoomPhoto(index) {
       this.$emit("zoom-photo", index);
     },
+    addToCart(){
+      this.$emit("add-tocart");
+    }
   },
 
   props: {
