@@ -3,7 +3,7 @@
     <ul class="grid grid-cols-2 gap-y-10 ml-10 lg:grid-cols-5">
       <li v-for="(photo, index) in searchphotos" :key="index">
         <img
-          :src="photocase.src"
+          :src="require(`../assets/Case/${photo.src}`)"
           class="px-2 py-5 h-auto w-"
           :alt="photo.title"
         />
@@ -11,11 +11,9 @@
         <div class="flex flex-row justify-start space-x-1">
           <button
             class="bg-black text-white font-serif px-3 my-auto ml-2 text-lg rounded-md focus:outline-none"
-            v-on:click="favorite(index)"
+            v-on:click="addtoshoppigcart(index)"
           >
-            <i v-show="!photo.favor"> ADD TO CART </i>
-
-            <i v-show="photo.favor"> ADDED </i>
+            <i> ADD TO CART </i>
           </button>
         </div>
         <p class="ml-2 text-lg font-serif text-black-500">{{ photo.title }}</p>
@@ -37,16 +35,16 @@ export default {
   //   console.log(this.photos);
   // },
 
-  computed: {
-    photocase() {
-      return {
-        ...this.searchphotos,
-        src:
-          this.searchphotos.src &&
-          require(`@/assets/Case/${this.searchphotos.src}`),
-      };
-    },
-  },
+  // computed: {
+  //   photocase() {
+  //     return {
+  //       ...this.searchphotos,
+  //       src:
+  //         this.searchphotos.src &&
+  //         require(`@/assets/Case/${this.searchphotos.src}`),
+  //     };
+  //   },
+  // },
 
   methods: {
     // async fetchGetItem() {
@@ -65,7 +63,7 @@ export default {
     },
     async addProduct(product) {
       try {
-        await fetch(this.urluserorder,{
+        await fetch(this.urluserorder, {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -76,7 +74,7 @@ export default {
             price: product.price,
           }),
         });
-      }catch(error){
+      } catch (error) {
         console.log("error");
       }
     },

@@ -3,8 +3,11 @@
     <!-- <base-product-list v-for="photo in photos" :key="photo.id" :home="photo" ></base-product-list> -->
     <!-- <BaseItem :countphoto = "countPhoto" :countlike = "countLike" :show = "show" @show-bar = "toggle"/>  -->
     <!-- <BaseSelect :searchselectphotos = "searchSelectPhoto" :select_image = "select_image" @close-photo = "closePhoto" @zoom-photo="zoomPhoto" :searchphotos = "searchphotos"/> -->
-    <BaseProduct :searchphotos="photos" @like-photo="favorite" @zoom-photo="zoomPhoto"/>
-
+    <BaseProduct
+      :searchphotos="photos"
+      @like-photo="favorite"
+      @zoom-photo="zoomPhoto"
+    />
   </div>
 </template>
 
@@ -24,17 +27,88 @@ export default {
 
   data() {
     return {
-      urlphotos: "http://localhost:5000/photos",
-      urluserorder:"http://localhost:5000/orderuser",
+    //   urlphotos: "http://localhost:5000/photos",
+    //   urluserorder: "http://localhost:5000/orderuser",
       show: { icon: true, searchbar: false },
       input: "",
-      photos:[],
-      orderuser:[]
+      photos: [
+          {
+            "src": "1.jpg",
+            "title": "LAKERS MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "2.jpg",
+            "title": "HEATS MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "3.jpg",
+            "title": "MAGIC MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "4.jpg",
+            "title": "PACERS MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "5.jpg",
+            "title": "PACERS MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "6.jpg",
+            "title": "BUCKS MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "7.jpg",
+            "title": "76ERS MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "8.jpg",
+            "title": "GRIZZLIES MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "9.jpg",
+            "title": "MAVERICKS MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        },
+        {
+            "src": "10.jpg",
+            "title": "SPURS MANIA CASE",
+            "favor": false,
+            "like": 0,
+            "price": 55
+        }
+      ],
+    //   orderuser: [],
     };
   },
 
   methods: {
-    favorite(index) {
+    addtoshoppigcart(index) {
       this.photos[index].favor = !this.photos[index].favor;
       this.photos[index].like = this.photos[index].like + 1;
     },
@@ -62,39 +136,40 @@ export default {
       this.select_image = false;
     },
 
-    async fetchGetItem() {
-      const res = await fetch(this.urlphotos);
-      const data = await res.json();
+    //     async fetchGetItem() {
+    //       const res = await fetch(this.urlphotos);
+    //       const data = await res.json();
 
-      return data;
-    },
-    async fetchGetUserOrder() {
-      const res = await fetch(this.urluserorder);
-      const data = await res.json();
+    //       return data;
+    //     },
+    //     async fetchGetUserOrder() {
+    //       const res = await fetch(this.urluserorder);
+    //       const data = await res.json();
 
-      return data;
-    },
-  },
-  async created() {
-    this.photos = await this.fetchGetItem()
-    this.urluserorder = await this.fetchGetUserOrder()
-  },
-  computed: {
-    // searchphotos() {
-    //   return this.photos.filter((c) => {
-    //     return c.title.toLowerCase().includes(this.input.toLowerCase());
-    //   });
-    // },
+    //       return data;
+    //     },
+    //   },
+    //   async created() {
+    //     this.photos = await this.fetchGetItem()
+    //     this.urluserorder = await this.fetchGetUserOrder()
+    //   },
+    computed: {
+      // searchphotos() {
+      //   return this.photos.filter((c) => {
+      //     return c.title.toLowerCase().includes(this.input.toLowerCase());
+      //   });
+      // },
 
-    countPhoto() {
-      return this.photos.length;
-    },
+      countPhoto() {
+        return this.photos.length;
+      },
 
-    searchSelectPhoto() {
-      return this.photos.filter((c) => c.zoom);
-    },
-    countLike() {
-      return this.photos.filter((t) => t.like).length;
+      searchSelectPhoto() {
+        return this.photos.filter((c) => c.zoom);
+      },
+      countLike() {
+        return this.photos.filter((t) => t.like).length;
+      },
     },
   },
 };
