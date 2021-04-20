@@ -6,23 +6,22 @@
         จำนวนสินค้า
       </div>
       <div>
-        <div class="shadow m-5">
-          <div v-for="(order,index) in orderuser" :key="index" class="flex justify-start m-10">
-            
-            <div>
-              <img :src="require(`../assets${order.src}`)" class="w-auto h-52" />
+        <div
+          v-for="(order, index) in orderuser"
+          :key="index"
+          class="flex justify-start m-10"
+        >
+          <div>
+            <img :src="require(`../assets/${order.src}`)" class="w-auto h-52" />
+          </div>
+          <div class="ml-24">
+            <div class="text-lg">
+              {{order.title}}
             </div>
-            <div class="ml-24">
-              <div class="text-lg ">
-                
-                {{order.title}}
-              </div>
-            </div>
-            
-              <div class="absolute right-10">
-                <div class=" material-icons">cancel</div>
-              </div>
-            
+          </div>
+
+          <div class="absolute right-10">
+            <div class="material-icons">cancel</div>
           </div>
         </div>
       </div>
@@ -34,32 +33,22 @@ export default {
   data() {
     return {
       orderuser: [],
-      urlorderuser: "http://localhost:5000/orderuser",
+      urluserorder: "http://localhost:5000/orderuser",
     };
   },
-  async created() {
-    const res = await fetch(this.urlorderuser);
-    this.orderuser = [...this.orderuser, await res.json()];
+  async created(){
+       this.orderuser = await this.getOrders()
   },
-  methods:{
-    async getOrder(order){
-      return await require(`../assets/Case/${order.src}`)
+  methods: {
+    async getOrders() {
+      try {
+        const res = await fetch(this.urluserorder);
+        const data = await res.json();
+        return data;
+      } catch (error) {
+        console.log(error);
+      }
     },
-    async fetchGetUserOrder() {
-          const res = await fetch(this.urlorderuser);
-          const data = await res.json();
-
-          return data;
-        },
-  }
-  // computed:{
-  //   getOrder(img){
-  //     return{
-  //       ...this.orderuser,
-  //       logo:
-  //         this.orderuser.src && require(`../assets/Case/${img}`)
-  //     }
-  //   }
-  // }
+  },
 };
 </script>
