@@ -65,15 +65,15 @@ export default {
     },
     async addProduct(product) {
       try {
-        await fetch(this.url, {
+        await fetch(this.urluserorder,{
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify({
-            src: this.product.src,
-            title: this.product.title,
-            price: this.product.price,
+            src: product.src,
+            title: product.title,
+            price: product.price,
           }),
         });
       }catch(error){

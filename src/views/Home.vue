@@ -24,81 +24,12 @@ export default {
 
   data() {
     return {
-      url: "http://localhost:5000/photos",
+      urlphotos: "http://localhost:5000/photos",
+      urluserorder:"http://localhost:5000/orderuser",
       show: { icon: true, searchbar: false },
       input: "",
-      photos:[
-        // {
-        //     src: '1.jpg',
-        //     title: 'LAKERS MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '2.jpg',
-        //     title: 'HEATS MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '3.jpg',
-        //     title: 'MAGIC MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '4.jpg',
-        //     title: 'PACERS MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '5.jpg',
-        //     title: 'PACERS MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '6.jpg',
-        //     title: 'BUCKS MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '7.jpg',
-        //     title: '76ERS MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '8.jpg',
-        //     title: 'GRIZZLIES MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '9.jpg',
-        //     title: 'MAVERICKS MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-        // {
-        //     src: '10.jpg',
-        //     title: 'SPURS MANIA CASE',
-        //     favor: false,
-        //     like: 0,
-        //     zoom: false
-        // },
-      ],
+      photos:[],
+      orderuser:[]
     };
   },
 
@@ -132,7 +63,13 @@ export default {
     },
 
     async fetchGetItem() {
-      const res = await fetch(this.url);
+      const res = await fetch(this.urlphotos);
+      const data = await res.json();
+
+      return data;
+    },
+    async fetchGetUserOrder() {
+      const res = await fetch(this.urluserorder);
       const data = await res.json();
 
       return data;
@@ -140,6 +77,7 @@ export default {
   },
   async created() {
     this.photos = await this.fetchGetItem()
+    this.urluserorder = await this.fetchGetUserOrder()
   },
   computed: {
     // searchphotos() {
