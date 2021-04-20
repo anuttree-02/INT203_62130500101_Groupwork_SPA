@@ -146,16 +146,18 @@ export default {
         console.log(error)
       }
     },
-    addToCart() {
+    
+    addToCart(photo) { console.log(photo)
       this.addProduct({
-        src: this.photos.src,
-        title: this.photos.title,
-        price: this.photos.price,
+        src: photo.src,
+        title:photo.title,
+        price: photo.price,
       });
     },
+  
     async addProduct(product) {
       try {
-        await fetch(this.urlordeuser, {
+        await fetch("http://localhost:5000/orderuser", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -170,16 +172,11 @@ export default {
         console.log("error");
       }
     },
-        async fetchGetUserOrder() {
-          const res = await fetch(this.urlorderuser);
-          const data = await res.json();
-
-          return data;
-        },
+        
     },
     async created(){
        this.photos = await this.GetItems()
-       this.urlorderuser = await this.fetchGetUserOrder()
+       
     },
     computed: {
       // searchphotos() {

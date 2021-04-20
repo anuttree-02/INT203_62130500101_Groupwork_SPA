@@ -44,7 +44,13 @@ export default {
   methods:{
     async getOrder(order){
       return await require(`../assets/Case/${order.src}`)
-    }
+    },
+    async fetchGetUserOrder() {
+          const res = await fetch(this.urlorderuser);
+          const data = await res.json();
+
+          return data;
+        },
   }
   // computed:{
   //   getOrder(img){

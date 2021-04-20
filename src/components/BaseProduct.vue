@@ -11,7 +11,7 @@
         <div class="flex flex-row justify-start space-x-1">
           <button
             class="bg-black text-white font-serif px-3 my-auto ml-2 text-lg rounded-md focus:outline-none"
-            v-on:click="addToCart()"
+            v-on:click="addToCart(photo)"
           >
             <i> ADD TO CART </i>
           </button>
@@ -63,8 +63,8 @@ export default {
     zoomPhoto(index) {
       this.$emit("zoom-photo", index);
     },
-    addToCart(){
-      this.$emit("add-tocart");
+    addToCart(photo){
+      this.$emit("add-tocart",photo);
     }
   },
 
